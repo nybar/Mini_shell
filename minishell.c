@@ -6,7 +6,7 @@
 /*   By: bbach <bbach@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:00:41 by bbach             #+#    #+#             */
-/*   Updated: 2023/10/11 19:03:50 by bbach            ###   ########.fr       */
+/*   Updated: 2023/10/11 19:08:54 by bbach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char    *parse_input(char *input, char **env)
     char    *path_line;
     int     i;
 
-    i = -1;
+    i = -1;;
     while (env[++i])
     {
         if (ft_strncmp("PATH=", env[i], 5) == 0)
