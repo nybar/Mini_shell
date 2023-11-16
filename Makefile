@@ -6,11 +6,13 @@
 #    By: bbach <bbach@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/11 16:59:07 by bbach             #+#    #+#              #
-#    Updated: 2023/10/11 19:03:02 by bbach            ###   ########.fr        #
+#    Updated: 2023/11/15 09:13:41 by bbach            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = minishell.c
+SRC = minishell.c \
+		skip_space_and_tab.c \
+		check_quotes.c
 
 OBJS = $(SRC:.c=.o)
 

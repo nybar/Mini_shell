@@ -6,7 +6,7 @@
 /*   By: bbach <bbach@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:00:41 by bbach             #+#    #+#             */
-/*   Updated: 2023/10/11 19:08:54 by bbach            ###   ########.fr       */
+/*   Updated: 2023/11/16 14:14:23 by bbach            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,38 @@ int	main(int ac, char **av, char **env)
     (void)ac;
     (void)av;
     (void)env;
-    
+
     t_first first;
-    char    *input;
-
+    //t_token token;
+    t_minishell minishell;
+    //int i = 0;
+    initialize(&minishell);
     while (1)
-    {
-        input = readline("minishell>$ ");
-        if (!input)
-            break;
-        if (input)
-            add_history(input);
-        first.line = input;
-        ft_printf("%s\n", first.line);
-        free(input);
+    {   
+        initialize(&minishell);
+        first.input = readline("minishell>$ ");
+        if (valid_input(first.input) == 0)
+        {
+            add_history(first.input);
+            dequotation(first.input, &minishell);
+            printf("input_dequoted = %s\n", minishell.input_dequoted);
+            count_double_quote(minishell.input_dequoted, &minishell);
+            printf("nb_d_quote = %d\n", minishell.nb_d_quote);
+            check_double_quote(0, &minishell, minishell.input_dequoted);
+            // if (minishell.nb_d_quote < 2)
+            //     ft_printf("Error: quote not closed\n");
+            //printf("str_in_d_quote = %s\n", minishell.str_in_d_quote[0]);
+            free(first.input);
+        }
+        else
+            free(first.input);
     }
+     return (0);   
 }
-
-char    *parse_input(char *input, char **env)
+void    initialize(t_minishell *minishell)
 {
-    char    **cmd;
-    char    *path_line;
-    int     i;
-
-    i = -1;;
-    while (env[++i])
-    {
-        if (ft_strncmp("PATH=", env[i], 5) == 0)
-                path_line = ft_strdup(env[i] + 5);
+    //minishell->str_in_d_quote = NULL;
+    minishell->nb_s_quote = 0;
+    minishell->nb_d_quote = 0;
+    //minishell->input_dequoted = NULL;
 }
